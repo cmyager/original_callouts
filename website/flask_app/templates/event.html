@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">{{ legend }}</legend>
+
+        <!-- Title -->
+        <div class="form-group">
+          {{ form.title.label(class="form-control-label") }}
+          {% if form.title.errors %}
+            {{ form.title(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.title.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.title(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          {{ form.description.label(class="form-control-label") }}
+          {% if form.description.errors %}
+            {{ form.description(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.description(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+
+        <!-- Start Date -->
+        <div class="form-group">
+          {{ form.start_date.label(class="form-control-label") }} (Current Date: {{ form.get_current_date_cst() }})
+          {% if form.start_date.errors %}
+            {{ form.start_date(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.start_date.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.start_date(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+
+        <!-- Start Time -->
+        <div class="form-group">
+          {{ form.start_time.label(class="form-control-label") }} (Current Time: {{ form.get_current_time_cst() }})
+          {% if form.start_time.errors %}
+            {{ form.start_time(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.start_time.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.start_time(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+
+        <!-- Max Attendees -->
+        <div class="form-group">
+          {{ form.max_members.label(class="form-control-label") }}
+          {% if form.max_members.errors %}
+            {{ form.max_members(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.max_members.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.max_members(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+  
+        <!-- Selected Members -->
+        <div class="form-group">
+          {{ form.members.label(class="form-control-label") }}
+          {% if form.members.errors %}
+            <select id="members" name="members" class="form-control form-control-lg is-invalid" data-placeholder="{{form.members.label.text}}" multiple>
+              {% for member in form.members.choices %}
+                <option value="{{member[0]}}" data-image="https://cdn.discordapp.com{{form.members.users[member[0]]['avatar_url']}}">{{member[0]}}</option>
+              {% endfor %}
+            </select>
+            <div class="invalid-feedback">
+              {% for error in form.members.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            <select id="members" name="members" class="form-control form-control-lg" data-placeholder="{{form.members.label.text}}" multiple>
+            {% for member in form.members.choices %}
+              <option value="{{member[0]}}" data-image="https://cdn.discordapp.com{{form.members.users[member[0]]['avatar_url']}}">{{member[0]}}</option>
+            {% endfor %}
+            </select>
+          {% endif %}
+        </div>
+    </fieldset>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+  </form>
+</div>
+
+<script>
+  const select = document.querySelector('select[name=members]');
+  new lc_select(select, {
+      wrap_width: '100%',
+      min_for_search: 3,
+      pre_placeh_opt: true,
+      max_opts : 6,
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+Turbulent.pem
+credentials.json
+
+# __pycache__
+discord.log
+
+# Visual studio #
+.vscode/launch.json
+.vscode/settings.json
+.env
+.venv
+# Debugging output #
+res.json
+trialsofthenine-data.json
+world_sql_content_*
+images/

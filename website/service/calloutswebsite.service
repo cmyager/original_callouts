@@ -1,0 +1,13 @@
+[Unit]
+Description=Callouts Website Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=callouts
+ExecStart=/bin/bash /home/callouts/website/service/start_calloutswebsite.sh
+
+[Install]
+WantedBy=multi-user.target

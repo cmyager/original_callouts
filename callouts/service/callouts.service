@@ -1,0 +1,13 @@
+[Unit]
+Description=Callouts Bot Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=callouts
+ExecStart=/bin/bash /home/callouts/callouts/service/start_callouts.sh
+
+[Install]
+WantedBy=multi-user.target
