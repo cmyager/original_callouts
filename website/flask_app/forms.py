@@ -31,7 +31,7 @@ class EventForm(FlaskForm):
             valid = "Too Many Invitees"
         if valid is not True:
             raise ValidationError(valid)
-    
+
     ####################################################################################################################
     def validate_start_date(self, data):
         if data.data < datetime.now(CENTRAL_TIMEZONE).date():
@@ -49,7 +49,7 @@ class EventForm(FlaskForm):
     ####################################################################################################################
     def get_current_time_cst(self):
         return datetime.now(CENTRAL_TIMEZONE).strftime("%I:%M %p")
-    
+
     ####################################################################################################################
     def __init__(self, *args, **kwargs):
         FlaskForm.__init__(self, *args, **kwargs)

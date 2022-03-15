@@ -34,10 +34,11 @@ class Register(commands.Cog):
             await manager.clean_messages()
 
         registered_user_info = self.bot.db.get_user_by_discord_id(ctx.author.id)
+        bungie_id = None
         if registered_user_info:
             registration_msg = await manager.send_private_message("Lets update your registration")
             bungie_id = registered_user_info.get('bungie_id')
-        else:
+        if bungie_id is None:
             # Get the user registered
             registration_msg = await manager.send_private_message("Enter your bungie id. It can be found at https://www.bungie.net/en/Profile/",
                                                                   attach_file=discord.File("registration_example.png"))

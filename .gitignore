@@ -1,0 +1,10 @@
+website/config.json
+website/test_app.py
+
+**/.vscode
+**/.venv
+
+callouts/images/
+callouts/cogs/raid_models/images/
+callouts/credentials.json
+callouts/replacement_credentialk

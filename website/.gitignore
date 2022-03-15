@@ -1,8 +1,0 @@
-app/__pycache__
-/flenv
-venv
-*.pyc
-.env
-.vscode
-config.json
-test_app.py

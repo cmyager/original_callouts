@@ -1,7 +1,7 @@
 
 ############################################################################################################################
 class VaultModel:
-    
+
     ####################################################################################################################
     def ruins(self):
         self.title = "The Waking Ruins"
@@ -60,7 +60,7 @@ class VaultModel:
         self.thumbnail = None
 
         self.description = "**Defeat the Templar**\n\n"
-        
+
         self.description +="1: Grab the Relic to begin the Templar fight\n"
         self.description +="2: Destroy three Oracles in the correct order\n"
         self.description +="3: Use the Relic’s Super to remove the Templar’s shield\n"
@@ -112,7 +112,7 @@ class VaultModel:
                        ("Enemies", "TBD", False),
                        ("Triumphs", "TBD", False),]
 
-    
+
     ####################################################################################################################
     def __init__(self, encounter=1):
 

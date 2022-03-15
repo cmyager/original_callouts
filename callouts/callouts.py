@@ -56,7 +56,7 @@ class Callouts(commands.AutoShardedBot):
     ####################################################################################################################
     async def on_ipc_ready(self):
         print("Ipc server is ready.")
-    
+
     ####################################################################################################################
     async def on_ipc_error(self, endpoint, error):
         print(endpoint, "raised", error)

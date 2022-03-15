@@ -27,7 +27,8 @@ class Report(commands.Cog):
         self.bot = bot
         self.chromeOptions = Options()
         self.chromeOptions.headless = True
-        self.executable_path='/home/callouts/callouts/drivers/chromedriver'
+        self.executable_path='/home/callouts/spirit/drivers/chromedriver'
+        self.chromeOptions.binary_location = "/usr/bin/chromium"
         self.channel_name = "raid-reports"
         self.clean_channel.start()
         self.clean_images.start()
@@ -62,7 +63,7 @@ class Report(commands.Cog):
                     delete_message = True
                 elif datetime.datetime.now() - message.created_at > datetime.timedelta(days=30):
                     delete_message = True
-               
+
                 if delete_message is True:
                     await message.delete()
 
@@ -114,7 +115,7 @@ class Report(commands.Cog):
 
         user_info = self.bot.db.get_user_by_discord_id(ctx.author.id)
         if not user_info:
-            # Get the user registered 
+            # Get the user registered
             user_info = await self.bot.cogs["Register"].register(ctx)
         if not user_info:
             return
@@ -213,7 +214,7 @@ class Report(commands.Cog):
                 driver = None
                 if os.path.isfile(image_path) is False:
                     driver = webdriver.Chrome(executable_path=self.executable_path,
-                                            options=self.chromeOptions)
+                                              options=self.chromeOptions)
                     # Set the dark theme
                     driver.get("https://raid.report/settings")
                     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "MuiFormControlLabel-root")))
@@ -228,8 +229,16 @@ class Report(commands.Cog):
                     element = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CLASS_NAME, "pgcr-table")))
                     sleep(2)
                     # Delete the ad
-                    driver.execute_script("""var element = arguments[0];element.parentNode.removeChild(element);""",
-                                        driver.find_element_by_class_name('jss1'))
+                    try:
+                        ad_element = driver.find_element_by_class_name("ad-tag")
+                        ad_container = ad_element.find_element_by_xpath('..')
+                        driver.execute_script("""var element = arguments[0];element.parentNode.removeChild(element);""",
+                                              ad_container)
+                        popup_container = driver.find_element_by_class_name("MuiTooltip-popper")
+                        driver.execute_script("""var element = arguments[0];element.parentNode.removeChild(element);""",
+                                              popup_container)
+                    except:
+                        pass
                     # Find the report
                     element = driver.find_element_by_class_name("side-container")
                     # Screenshot the report
@@ -240,7 +249,7 @@ class Report(commands.Cog):
 
                 # # Get all attachment names
                 # attachments = [i.filename for sublist in messages for i in sublist.attachments]
-                
+
                 # Only post new reports
                 if image_name not in attachments:
                     msg = await reports_channel.send(users ,file=discord.File(image_path))
@@ -282,7 +291,7 @@ class Report(commands.Cog):
         # the initial reactions added by the bot as being indicative of a report request
         if member != message.author and channel.id == (await self.get_reports_channel(guild)).id:
             if payload.emoji.name == "\N{HEAVY PLUS SIGN}":
-                try:                    
+                try:
                     await message.remove_reaction(payload.emoji, member)
                     ctx = FCTX(channel, member, None, guild, self.bot)
                     await self.report(ctx)

@@ -42,4 +42,3 @@ class ScourgeModel:
         self.fields = []
 
         self.encounters[encounter]()
- 

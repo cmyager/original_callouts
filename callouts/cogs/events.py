@@ -155,7 +155,7 @@ class Events(commands.Cog):
             manager.add_messages_to_clean([ctx.message])
             await manager.clean_messages()
             return await manager.send_private_message("!event is not supported anymore. Please react to the pinned message in the upcoming-events channel to create an event.")
-            
+
         # Title
         await manager.send_private_message("Enter event title:")
         res = await manager.get_next_private_message()

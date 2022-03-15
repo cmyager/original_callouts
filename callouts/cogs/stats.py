@@ -82,7 +82,7 @@ class Stats(commands.Cog):
     @stats.command()
     async def trials(self, ctx):
         """Display Trials stats across all characters on your account
-        
+
         `stats trials` - Display your PvE stats (preferred platform)"""
         user_info = await self.get_user_info(ctx)
         platform_info = self.get_primary_account_info(user_info)
@@ -237,7 +237,7 @@ class Stats(commands.Cog):
     async def get_user_info(self, ctx):
         user_info = self.bot.db.get_user_by_discord_id(ctx.author.id)
         if not user_info:
-            # Get the user registered 
+            # Get the user registered
             user_info = await self.bot.cogs["Register"].register(ctx)
         return user_info
 

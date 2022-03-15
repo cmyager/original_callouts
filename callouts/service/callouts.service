@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=5
 User=callouts
-ExecStart=/bin/bash /home/callouts/callouts/service/start_callouts.sh
+ExecStart=/bin/bash /home/callouts/original_callouts/callouts/service/start_callouts.sh
 
 [Install]
 WantedBy=multi-user.target
