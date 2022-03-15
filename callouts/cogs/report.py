@@ -207,8 +207,9 @@ class Report(commands.Cog):
                         if raid_user_info:
                             user_id = raid_user_info['user_id']
                             member = guild.get_member(user_id)
-                            if member:
-                                users += f"<@{user_id}> "
+                            user = f"<@{user_id}> "
+                            if member and user not in users:
+                                users += user
 
             try:
                 driver = None
